@@ -30,7 +30,7 @@ public class MoviesHandler extends BaseHttpHandler {
     private static final String ERROR_INVALID_ID = "Некорректный ID";
     private static final String ERROR_INVALID_YEAR_QUERY = "Некорректный параметр запроса — 'year'";
     private static final String ERROR_METHOD_NOT_ALLOWED = "Метод не поддерживается";
-    private static final String ERROR_NO_SUCH_ENDPOINT = "Метод не поддерживается";
+    private static final String ERROR_NO_SUCH_ENDPOINT = "Такого эндпоинта не существует";
 
     private final MoviesStore moviesStore;
 
