@@ -21,9 +21,11 @@ public abstract class BaseHttpHandler implements HttpHandler {
     protected static final int STATUS_NOT_FOUND = 404;
     protected static final int STATUS_UNSUPPORTED_MEDIA_TYPE = 415;
     protected static final int STATUS_UNPROCESSABLE_ENTITY = 422;
+    protected static final int STATUS_METHOD_NOT_ALLOWED = 405;
     protected static final String METHOD_GET = "GET";
     protected static final String METHOD_POST = "POST";
     protected static final String METHOD_DELETE = "DELETE";
+    protected static final String METHOD_PUT =  "PUT";
     private static final Gson GSON = new Gson();
 
     protected void sendJson(HttpExchange ex, int status, String json) throws IOException {

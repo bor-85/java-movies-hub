@@ -21,8 +21,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static ru.practicum.moviehub.http.BaseHttpHandler.CT_HEADER_NAME;
-import static ru.practicum.moviehub.http.BaseHttpHandler.CT_JSON;
+import static ru.practicum.moviehub.http.BaseHttpHandler.*;
 
 public class MoviesApiTest {
     private static MoviesServer server;
@@ -57,23 +56,20 @@ public class MoviesApiTest {
     void getMovies_whenEmpty_returnsEmptyArray() throws Exception {
 
         URI uri = URI.create(BASE + MoviesHandler.BASE_URL_PATH);
-        // создайте объект GET-запроса на эндпоинт /movies
+
         HttpRequest req = HttpRequest.newBuilder()
                 .GET()
                 .uri(uri)
                 .header(CT_HEADER_NAME, CT_JSON)
                 .build();
 
-        // Обработчик тела запроса
         HttpResponse.BodyHandler<String> responseBodyHandler =
                 HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8);
-        // Отправьте запрос
+
         HttpResponse<String> resp = client.send(req, responseBodyHandler);
 
-        // Допишите проверку кода ответа
         assertEquals(BaseHttpHandler.STATUS_OK, resp.statusCode(), "GET /movies должен вернуть 200");
 
-        // Допишите проверку заголовка Content-Type
         String contentTypeHeaderValue =
                 resp.headers().firstValue(CT_HEADER_NAME).orElse("");
 
@@ -93,23 +89,21 @@ public class MoviesApiTest {
         store.addMovie("Матрица", 1999);
         store.addMovie("Интерстеллар", 2014);
         URI uri = URI.create(BASE + MoviesHandler.BASE_URL_PATH);
-        // создайте объект GET-запроса на эндпоинт /movies
+
         HttpRequest req = HttpRequest.newBuilder()
                 .GET()
                 .uri(uri)
                 .header(CT_HEADER_NAME, CT_JSON)
                 .build();
 
-        // Обработчик тела запроса
+
         HttpResponse.BodyHandler<String> responseBodyHandler =
                 HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8);
-        // Отправьте запрос
+
         HttpResponse<String> resp = client.send(req, responseBodyHandler);
 
-        // Допишите проверку кода ответа
         assertEquals(BaseHttpHandler.STATUS_OK, resp.statusCode(), "GET /movies должен вернуть 200");
 
-        // Допишите проверку заголовка Content-Type
         String contentTypeHeaderValue =
                 resp.headers().firstValue(CT_HEADER_NAME).orElse("");
 
@@ -141,16 +135,13 @@ public class MoviesApiTest {
                 .header(CT_HEADER_NAME, CT_JSON)
                 .build();
 
-        // Обработчик тела запроса
         HttpResponse.BodyHandler<String> responseBodyHandler =
                 HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8);
-        // Отправить запрос
+
         HttpResponse<String> resp = client.send(req, responseBodyHandler);
 
-        // Проверка кода ответа
         assertEquals(BaseHttpHandler.STATUS_OK, resp.statusCode(), "GET /movies/{id} должен вернуть 200");
 
-        // Проверка заголовка Content-Type
         String contentTypeHeaderValue =
                 resp.headers().firstValue(CT_HEADER_NAME).orElse("");
 
@@ -179,16 +170,13 @@ public class MoviesApiTest {
                 .header(CT_HEADER_NAME, CT_JSON)
                 .build();
 
-        // Обработчик тела запроса
         HttpResponse.BodyHandler<String> responseBodyHandler =
                 HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8);
-        // Отправить запрос
+
         HttpResponse<String> resp = client.send(req, responseBodyHandler);
 
-        // Проверка кода ответа
         assertEquals(BaseHttpHandler.STATUS_NOT_FOUND, resp.statusCode(), "GET /movies/{id} должен вернуть 404");
 
-        // Проверка заголовка Content-Type
         String contentTypeHeaderValue =
                 resp.headers().firstValue(CT_HEADER_NAME).orElse("");
 
@@ -215,16 +203,13 @@ public class MoviesApiTest {
                 .header(CT_HEADER_NAME, CT_JSON)
                 .build();
 
-        // Обработчик тела запроса
         HttpResponse.BodyHandler<String> responseBodyHandler =
                 HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8);
-        // Отправить запрос
+
         HttpResponse<String> resp = client.send(req, responseBodyHandler);
 
-        // Проверка кода ответа
         assertEquals(BaseHttpHandler.STATUS_BAD_REQUEST, resp.statusCode(), "GET /movies/{id} должен вернуть 400");
 
-        // Проверка заголовка Content-Type
         String contentTypeHeaderValue =
                 resp.headers().firstValue(CT_HEADER_NAME).orElse("");
 
@@ -251,13 +236,11 @@ public class MoviesApiTest {
                 .header(CT_HEADER_NAME, CT_JSON)
                 .build();
 
-        // Обработчик тела запроса
         HttpResponse.BodyHandler<String> responseBodyHandler =
                 HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8);
-        // Отправить запрос
+
         HttpResponse<String> resp = client.send(req, responseBodyHandler);
 
-        // Проверка кода ответа
         assertEquals(BaseHttpHandler.STATUS_NO_CONTENT, resp.statusCode(), "DELETE /movies/{id} должен вернуть 204");
     }
 
@@ -275,16 +258,13 @@ public class MoviesApiTest {
                 .header(CT_HEADER_NAME, CT_JSON)
                 .build();
 
-        // Обработчик тела запроса
         HttpResponse.BodyHandler<String> responseBodyHandler =
                 HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8);
-        // Отправить запрос
+
         HttpResponse<String> resp = client.send(req, responseBodyHandler);
 
-        // Проверка кода ответа
         assertEquals(BaseHttpHandler.STATUS_NOT_FOUND, resp.statusCode(), "DELETE /movies/{id} должен вернуть 404");
 
-        // Проверка заголовка Content-Type
         String contentTypeHeaderValue =
                 resp.headers().firstValue(CT_HEADER_NAME).orElse("");
 
@@ -313,16 +293,13 @@ public class MoviesApiTest {
                 .header(CT_HEADER_NAME, CT_JSON)
                 .build();
 
-        // Обработчик тела запроса
         HttpResponse.BodyHandler<String> responseBodyHandler =
                 HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8);
-        // Отправьте запрос
+
         HttpResponse<String> resp = client.send(req, responseBodyHandler);
 
-        // Допишите проверку кода ответа
         assertEquals(BaseHttpHandler.STATUS_OK, resp.statusCode(), "GET /movies?year= должен вернуть 200");
 
-        // Допишите проверку заголовка Content-Type
         String contentTypeHeaderValue =
                 resp.headers().firstValue(CT_HEADER_NAME).orElse("");
 
@@ -355,16 +332,13 @@ public class MoviesApiTest {
                 .header(CT_HEADER_NAME, CT_JSON)
                 .build();
 
-        // Обработчик тела запроса
         HttpResponse.BodyHandler<String> responseBodyHandler =
                 HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8);
-        // Отправить запрос
+
         HttpResponse<String> resp = client.send(req, responseBodyHandler);
 
-        // Проверка кода ответа
         assertEquals(BaseHttpHandler.STATUS_BAD_REQUEST, resp.statusCode(), "GET /movies?year= должен вернуть 400");
 
-        // Проверка заголовка Content-Type
         String contentTypeHeaderValue =
                 resp.headers().firstValue(CT_HEADER_NAME).orElse("");
 
@@ -473,6 +447,31 @@ public class MoviesApiTest {
         Gson gson = new Gson();
         JsonObject error = gson.fromJson(resp.body(), JsonObject.class);
         assertEquals("Неподдерживаемый тип данных", error.get("error").getAsString());
+    }
+
+    @Test
+    void putMovie_whenMethodNotAllowed_returns405() throws Exception {
+        URI uri = URI.create(BASE + MoviesHandler.BASE_URL_PATH);
+
+        HttpRequest req = HttpRequest.newBuilder()
+                .uri(uri)
+                .method(METHOD_PUT, HttpRequest.BodyPublishers.noBody())
+                .header(CT_HEADER_NAME, CT_JSON)
+                .build();
+
+        HttpResponse<String> resp = client.send(req,
+                HttpResponse.BodyHandlers.ofString(StandardCharsets.UTF_8));
+
+        assertEquals(BaseHttpHandler.STATUS_METHOD_NOT_ALLOWED, resp.statusCode(),
+                "PUT /movies должен вернуть 405");
+
+        String contentTypeHeaderValue = resp.headers().firstValue(CT_HEADER_NAME).orElse("");
+        assertEquals(CT_JSON, contentTypeHeaderValue,
+                "Content-Type должен содержать формат данных и кодировку");
+
+        Gson gson = new Gson();
+        JsonObject error = gson.fromJson(resp.body(), JsonObject.class);
+        assertTrue(error.get("error").getAsString().contains("Метод не поддерживается"));
     }
 
 }

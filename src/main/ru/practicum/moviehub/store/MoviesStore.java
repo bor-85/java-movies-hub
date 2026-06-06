@@ -2,6 +2,7 @@ package ru.practicum.moviehub.store;
 
 import ru.practicum.moviehub.model.Movie;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +18,15 @@ public class MoviesStore {
         return movie;
     }
 
-    public Map<Integer, Movie> getMovies() {
-        return movies;
+    public Collection<Movie> getMoviesByYear(int year) {
+        return getMovies()
+                .stream()
+                .filter(movie -> movie.getYear() == year)
+                .toList();
+    }
+
+    public Collection<Movie> getMovies() {
+        return movies.values();
     }
 
     public Movie getMovieById(int id) {
