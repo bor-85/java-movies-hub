@@ -30,6 +30,7 @@ public class MoviesHandler extends BaseHttpHandler {
     private static final String ERROR_INVALID_ID = "Некорректный ID";
     private static final String ERROR_INVALID_YEAR_QUERY = "Некорректный параметр запроса — 'year'";
     private static final String ERROR_METHOD_NOT_ALLOWED = "Метод не поддерживается";
+    private static final String ERROR_NO_SUCH_ENDPOINT = "Метод не поддерживается";
 
     private final MoviesStore moviesStore;
 
@@ -39,7 +40,6 @@ public class MoviesHandler extends BaseHttpHandler {
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        //Endpoint endpoint = getEndpoint(exchange.getRequestURI().getPath(), exchange.getRequestMethod(), exchange.getRequestURI().getQuery());
         String path = exchange.getRequestURI().getPath();
         String method = exchange.getRequestMethod();
         String query = exchange.getRequestURI().getQuery();
@@ -73,7 +73,7 @@ public class MoviesHandler extends BaseHttpHandler {
                         || path.matches(BASE_URL_PATH + "/[^/]+")) {
                     sendError(exchange, STATUS_METHOD_NOT_ALLOWED, ERROR_METHOD_NOT_ALLOWED);
                 } else {
-                    sendError(exchange, STATUS_NOT_FOUND, "Такого эндпоинта не существует");
+                    sendError(exchange, STATUS_NOT_FOUND, ERROR_NO_SUCH_ENDPOINT);
                 }
                 break;
         }
